@@ -7,7 +7,9 @@
 // @lc code=start
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Definition for singly-linked list.
@@ -22,16 +24,16 @@ import java.util.Map;
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        Map<ListNode, Integer> map = new HashMap<>();
+        Set<ListNode> map = new HashSet<>();
         while(headA != null) {
-            map.put(headA, headA.val);
+            map.add(headA);
             headA = headA.next;
         }
         while(headB != null) {
-            if (map.contaonsKey(headB)) {
+            if (map.contains(headB)) {
                 return headB;
             }
-            map.put(headB, headB.val);
+            map.add(headB);
             headB = headB.next;
         }
         return null;
