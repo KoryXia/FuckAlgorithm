@@ -21,23 +21,19 @@
  * }
  */
 class Solution {
-    int target;
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        this.target = targetSum;
-        return dfs(root, 0);
-
-    }
-
-    public boolean dfs(TreeNode root, int curr) {
         if (root == null) {
             return false;
         }
+
+        targetSum -= root.val;
         if (root.left == null && root.right == null) {
-            return (curr + root.val) == this.target;
+            return targetSum == 0;
         }
-        curr += root.val;
-        boolean left = dfs(root.left, curr);
-        boolean right = dfs(root.right, curr);
+
+        boolean left = hasPathSum(root.left, targetSum);
+        boolean right = hasPathSum(root.right, targetSum);
+
         return left || right;
     }
 }
