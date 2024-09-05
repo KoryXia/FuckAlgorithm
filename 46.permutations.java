@@ -11,27 +11,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 class Solution {
-    List<List<Integer>> res = new ArrayList<>();
-    List<Integer> path = new LinkedList<>();
-
+    private List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> permute(int[] nums) {
-        backtrack(nums);
+        backtracking(new LinkedList<>(), nums, new boolean[nums.length]);
         return res;
     }
 
-    public void backtrack(int[] nums) {
-        if (path.size() == nums.length) {
-            res.add(new ArrayList<>(path));
+    public void backtracking(LinkedList<Integer> list, int[] nums, boolean[] used) {
+        if (list.size() == nums.length) {
+            res.add(new ArrayList<>(list));
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
-            if (path.contains(nums[i])) {
+            if (used[i]) {
                 continue;
             }
-            path.add(nums[i]);
-            backtrack(nums);
-            path.removeLast();
+            list.add(nums[i]);
+            used[i] = true;
+            backtracking(list, nums, used);
+            used[i] = false;
+            list.removeLast();
         }
     }
 }
