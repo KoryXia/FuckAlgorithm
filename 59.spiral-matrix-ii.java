@@ -7,33 +7,40 @@
 // @lc code=start
 class Solution {
     public int[][] generateMatrix(int n) {
+        int startX = 0;
+        int startY = 0;
+        int offset = 1;
+        int count = 1;
+        int i = 0;
+        int j = 0;
+        int loop = 1;
         int[][] res = new int[n][n];
-        int top = 0;
-        int bottom = n - 1;
-        int left = 0;
-        int right = n - 1;
-        int k = 1;
-
-        while (k <= n * n) {
-            for (int i = left; i <= right; i++, k++) {
-                res[top][i] = k;
+        while (loop <= n / 2) {
+            i = startX;
+            j = startY;
+            for (j = startY; j < n - offset; j++) {
+                res[i][j] = count++;
             }
-            top++;
 
-            for (int i = top; i <= bottom; i++, k++) {
-                res[i][right] = k;
+            for (i = startX; i < n - offset; i++) {
+                res[i][j] = count++;
             }
-            right--;
 
-            for (int i = right; i >= left; i--, k++) {
-                res[bottom][i] = k;
+            for (; j > startY; j--) {
+                res[i][j] = count++;
             }
-            bottom--;
 
-            for (int i = bottom; i >= top; i--, k++) {
-                res[i][left] = k;
+            for (; i > startX; i--) {
+                res[i][j] = count++;
             }
-            left++;
+            startX++;
+            startY++;
+            offset++;
+            loop++;
+        }
+
+        if (n % 2 == 1){
+            res[n / 2][n / 2] = count;
         }
         return res;
     }
