@@ -17,13 +17,19 @@
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode cur = dummy;
+        
+        while (cur.next != null && cur.next.next != null) {
+            ListNode temp = cur.next;
+            ListNode next = cur.next.next.next;
+            cur.next = cur.next.next; // Step 1
+            cur.next.next = temp; // Step 2
+            cur.next.next.next = next; // Step 3
+            cur = cur.next.next; // move cur pointer
         }
-        ListNode next = head.next;
-        head.next = swapPairs(next.next); 
-        next.next = head;
-        return next;
+        return dummy.next;
     }
 }
 // @lc code=end
