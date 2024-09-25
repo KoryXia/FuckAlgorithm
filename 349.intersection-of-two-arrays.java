@@ -12,22 +12,19 @@ import java.util.Set;
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         Set<Integer> set = new HashSet<>();
-        for (int i : nums1) {
-            set.add(i);
+        for (int num : nums1) {
+            set.add(num);
         }
+
         Set<Integer> res = new HashSet<>();
-        for (int i: nums2) {
-            if (set.contains(i)) {
-                res.add(i);
+
+        for (int num : nums2) {
+            if (set.contains(num)) {
+                res.add(num);
             }
         }
-        int[] resArray = new int[res.size()];
-        int index = 0;
-        for (int i : res) {
-            resArray[index] = i;
-            index++;
-        }
-        return resArray;
+        
+        return res.stream().mapToInt(v -> v).toArray();
     }
 }
 // @lc code=end

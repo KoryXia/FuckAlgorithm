@@ -19,7 +19,7 @@ class Solution {
     public boolean isHappy(int n) {
         int slow = n;
         int fast = next(n);
-        while (fast != 1 && slow != fast) {
+        while (fast != 1 && slow != fast){
             slow = next(slow);
             fast = next(next(fast));
         }
