@@ -7,21 +7,19 @@
 // @lc code=start
 class Solution {
     public String reverseStr(String s, int k) {
-        int len = s.length();
-        char[] arr = s.toCharArray();
-        for (int i = 0; i < len; i += 2 * k) {
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i += 2*k) {
             int left = i;
-            int right = Math.min(i + k, len) - 1;
-
+            int right = Math.min(i + k - 1, chars.length - 1);
             while (left < right) {
-                char temp = arr[left];
-                arr[left] = arr[right];
-                arr[right] = temp;
+                char temp = chars[left];
+                chars[left] = chars[right];
+                chars[right] = temp;
                 left++;
                 right--;
             }
         }
-        return new String(arr);
+        return new String(chars);
     }
 }
 // @lc code=end
