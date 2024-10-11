@@ -9,7 +9,7 @@ class Solution {
     public String removeDuplicates(String s) {
         StringBuffer res = new StringBuffer();
         int curr = -1;
-        for(int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (curr >= 0 && res.charAt(curr) == c) {
                 res.deleteCharAt(curr);

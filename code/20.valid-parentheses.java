@@ -18,9 +18,9 @@ class Solution {
         map.put(']', '[');
         map.put('}', '{');
 
-        for(Character c : s.toCharArray()) {
+        for (Character c : s.toCharArray()) {
             if (map.containsKey(c)) {
-                if (stack.isEmpty() || map.get(c) != stack.pop()) {
+                if (stack.isEmpty() || stack.pop() != map.get(c)) {
                     return false;
                 }
                 continue;
