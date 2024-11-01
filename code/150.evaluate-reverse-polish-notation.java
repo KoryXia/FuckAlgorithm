@@ -14,22 +14,22 @@ class Solution {
 
         for (String token : tokens) {
             if (isInteger(token)) {
-                stack.push(Integer.parseInt(token));
+                stack.push(Integer.valueOf(token));
             } else {
+                int num1 = stack.pop();
                 int num2 = stack.pop();
-                int num1 = stack.pop(); 
                 switch (token) {
                     case "+":
-                        stack.push(num1 + num2);
+                        stack.push(num2 + num1);
                         break;
                     case "-":
-                        stack.push(num1 - num2);
+                        stack.push(num2 - num1);
                         break;
                     case "*":
-                        stack.push(num1 * num2);
+                        stack.push(num2 * num1);
                         break;
                     case "/":
-                        stack.push(num1 / num2);
+                        stack.push(num2 / num1);
                         break;
                     default:
                         break;
