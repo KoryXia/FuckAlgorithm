@@ -25,20 +25,20 @@ import java.util.List;
  * }
  */
 class Solution {
-    public void postOrder(TreeNode node, List<Integer> list) {
-        if (node == null) {
-            return;
-        }
-
-        postOrder(node.left, list);
-        postOrder(node.right, list);
-        list.add(node.val);
-    }
-
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         postOrder(root, res);
         return res;
+    }
+
+    public void postOrder(TreeNode node, List<Integer> res) {
+        if (node == null) {
+            return;
+        }
+
+        postOrder(node.left, res);
+        postOrder(node.right, res);
+        res.add(node.val);
     }
 }
 // @lc code=end

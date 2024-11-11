@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -33,14 +32,13 @@ class Solution {
         if (root == null) {
             return res;
         }
+        
         Queue<TreeNode> queue = new LinkedList<>();
-
         queue.offer(root);
 
         while (!queue.isEmpty()) {
             List<Integer> level = new ArrayList<>();
             int size = queue.size();
-
             while (size > 0) {
                 TreeNode node = queue.poll();
                 level.add(node.val);
@@ -52,11 +50,8 @@ class Solution {
                 }
                 size--;
             }
-
             res.add(level);
         }
-
-        
         return res;
     }
 }
