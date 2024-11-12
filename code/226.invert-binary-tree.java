@@ -31,19 +31,15 @@ import java.util.Queue;
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
-            return root;
+            return null;
         }
 
-        swap(root);
+        TreeNode node = root.left;
+        root.left = root.right;
+        root.right = node;
         invertTree(root.left);
         invertTree(root.right);
         return root;
-    }
-
-    public void swap(TreeNode node) {
-        TreeNode dummy = node.left;
-        node.left = node.right;
-        node.right = dummy;
     }
 }
 // @lc code=end
