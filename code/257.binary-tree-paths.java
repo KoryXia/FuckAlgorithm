@@ -27,22 +27,22 @@ import java.util.List;
 class Solution {
     List<String> res = new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        travel(root, "");
+        traversal(root, "");
         return res;
     }
 
-    public void travel(TreeNode node, String path) {
+    public void traversal(TreeNode node, String path) {
         if (node == null) {
             return;
         }
         if (node.left == null && node.right == null) {
-            res.add(path + node.val);
+            res.add(new StringBuilder(path).append(node.val).toString());
             return;
         }
-        
-        String tmp = path + node.val + "->" ;
-        travel(node.left, tmp);
-        travel(node.right, tmp);
+
+        String newPath = new StringBuilder(path).append(node.val).append("->").toString(); 
+        traversal(node.left, newPath);
+        traversal(node.right, newPath);
     }
 }
 // @lc code=end
