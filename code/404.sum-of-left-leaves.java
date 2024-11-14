@@ -21,11 +21,10 @@
  * }
  */
 class Solution {
-
     public int sumOfLeftLeaves(TreeNode root) {
-        return getSum(root, false);
+        return countLeftLeavesSum(root, false);
     }
-    public int getSum(TreeNode node, boolean isLeft) {
+    public int countLeftLeavesSum(TreeNode node, boolean isLeft) {
         if (node == null) {
             return 0;
         }
@@ -33,11 +32,10 @@ class Solution {
         if (node.left == null && node.right == null && isLeft) {
             return node.val;
         }
-        
-        int sum = 0;
-        sum += getSum(node.left, true);
-        sum += getSum(node.right, false);
 
+        int sum = 0;
+        sum += countLeftLeavesSum(node.left, true);
+        sum += countLeftLeavesSum(node.right, false);
         return sum;
     }
 }

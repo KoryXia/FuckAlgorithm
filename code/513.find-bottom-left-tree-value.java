@@ -28,17 +28,16 @@ import java.util.Queue;
  */
 class Solution {
     public int findBottomLeftValue(TreeNode root) {
-        List<List<Integer>> levels = new ArrayList<>();
+        int res = 0;
         Queue<TreeNode> queue = new LinkedList<>();
-
         queue.offer(root);
-
         while (!queue.isEmpty()) {
             int size = queue.size();
-            List<Integer> level = new ArrayList<>();
-            while (size > 0) {
+            for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
-                level.add(node.val);
+                if (i == 0) {
+                    res = node.val;
+                }
 
                 if (node.left != null) {
                     queue.offer(node.left);
@@ -46,12 +45,9 @@ class Solution {
                 if (node.right != null) {
                     queue.offer(node.right);
                 }
-                size--;
             }
-            levels.add(level);
         }
-
-        return levels.get(levels.size() -1).get(0);
+        return res;
     }
 }
 // @lc code=end

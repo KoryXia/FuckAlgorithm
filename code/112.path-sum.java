@@ -25,15 +25,14 @@ class Solution {
         if (root == null) {
             return false;
         }
-
-        targetSum -= root.val;
+        
         if (root.left == null && root.right == null) {
-            return targetSum == 0;
+            return targetSum == root.val;
         }
 
+        targetSum -= root.val;
         boolean left = hasPathSum(root.left, targetSum);
         boolean right = hasPathSum(root.right, targetSum);
-
         return left || right;
     }
 }
