@@ -21,24 +21,24 @@
  * }
  */
 class Solution {
-    private boolean res = true;
     private long prev = Long.MIN_VALUE;
     public boolean isValidBST(TreeNode root) {
-        valid(root);
-        return res;
-    }
-
-    public void valid(TreeNode node) {
-        if (node == null) {
-            return;
+        if (root == null) {
+            return true;
         }
 
-        valid(node.left);
-        if (node.val <= prev) {
-            res = false;
+        boolean left = isValidBST(root.left);
+        if (!left) {
+            return false;
         }
-        prev = node.val;
-        valid(node.right);
+
+        if (prev >= root.val) {
+            return false;
+        }
+        prev = root.val;
+
+        boolean right = isValidBST(root.right);
+        return right;
     }
 }
 // @lc code=end
