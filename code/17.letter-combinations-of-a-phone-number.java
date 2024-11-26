@@ -17,13 +17,12 @@ class Solution {
             return res;
         }
         String[] numString = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        backTracking(0, digits, numString);
+        backtracking(0, digits, numString);
         return res;
     }
 
     public void backtracking(int index, String digits, String[] numString) {
-        
-        if (sb.length() == digits.length()) {
+        if (index == digits.length()) {
             res.add(sb.toString());
             return;
         }
@@ -31,7 +30,7 @@ class Solution {
         String str = numString[digits.charAt(index) - '0'];
         for (int i = 0; i < str.length(); i++) {
             sb.append(str.charAt(i));
-            backTracking(index + 1, digits, numString);
+            backtracking(index + 1, digits, numString);
             sb.deleteCharAt(sb.length() - 1);
         }
     }

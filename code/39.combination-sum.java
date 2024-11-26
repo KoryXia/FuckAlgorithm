@@ -7,6 +7,7 @@
 // @lc code=start
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ class Solution {
     List<List<Integer>> res = new ArrayList<>();
     List<Integer> path = new LinkedList<>();
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
         backtracking(0, 0, target, candidates);
         return res;
     }
@@ -30,9 +32,7 @@ class Solution {
 
         for (int i = start; i < candidates.length; i++) {
             path.add(candidates[i]);
-            sum += candidates[i];
-            backtracking(i, sum, target, candidates);
-            sum -= candidates[i];
+            backtracking(i, sum + candidates[i], target, candidates);
             path.removeLast();
         }
     }

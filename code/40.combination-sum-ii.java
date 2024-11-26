@@ -32,15 +32,11 @@ class Solution {
         }
 
         for (int i = start; i < candidates.length; i++) {
-
             if (i > start && candidates[i] == candidates[i - 1]) {
                 continue;
             }
-
             path.add(candidates[i]);
-            sum += candidates[i];
-            backtracking(i + 1, sum, target, candidates);
-            sum -= candidates[i];
+            backtracking(i + 1, sum + candidates[i], target, candidates);
             path.removeLast();
         }
     }
