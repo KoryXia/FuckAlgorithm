@@ -37,18 +37,6 @@ public class Solution {
             headB = headB.next;
         }
         return null;
-
-        // ListNode currA = headA;
-        // ListNode currB = headB;
-
-        // if (currA == null || currB == null) {
-        //   return null;
-        // }
-        // while (currA != currB) {
-        //     currA = currA == null ? headB : currA.next;
-        //     currB = currB == null ? headA : currB.next;
-        // }
-        // return currA;
     }
 }
 // @lc code=end
