@@ -29,6 +29,7 @@ public class Solution {
             map.add(headA);
             headA = headA.next;
         }
+
         while(headB != null) {
             if (map.contains(headB)) {
                 return headB;
