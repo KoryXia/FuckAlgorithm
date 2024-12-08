@@ -5,23 +5,22 @@
  */
 
 // @lc code=start
+
+import java.util.Arrays;
+
 class Solution {
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
         Arrays.sort(s);
-
+        int cookieIndex = s.length - 1;
         int res = 0;
-        int cookie_index = s.length - 1;
-
-        for (int i = g.length - 1; i >= 0; i--) {
-            if (cookie_index >= 0 && s[cookie_index] >= g[i]) {
-                cookie_index--;
+        for (int i = g.length - 1; i >= 0 && cookieIndex >= 0; i--) {
+            if (g[i] <= s[cookieIndex]) {
+                cookieIndex--;
                 res++;
             }
         }
-
         return res;
     }
 }
 // @lc code=end
-
