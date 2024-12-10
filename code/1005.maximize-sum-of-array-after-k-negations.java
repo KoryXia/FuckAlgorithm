@@ -5,14 +5,19 @@
  */
 
 // @lc code=start
+
+import java.util.stream.IntStream;
+
 class Solution {
     public int largestSumAfterKNegations(int[] nums, int K) {
-        nums = IntStream.of(nums)
-                .boxed()
-                .sorted((o1, o2) -> Math.abs(o2) - Math.abs(o1))
-                .mapToInt(Integer::intValue).toArray();
-        int len = nums.length;	    
-        for (int i = 0; i < len; i++) {
+        nums = IntStream
+        .of(nums)
+        .boxed()
+        .sorted((o1, o2) -> Math.abs(o2) - Math.abs(o1))
+        .mapToInt(Integer::intValue)
+        .toArray();
+
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] < 0 && K > 0) {
                 nums[i] = -nums[i];
                 K--;
@@ -20,10 +25,10 @@ class Solution {
         }
 
         if (K % 2 == 1) {
-            nums[len - 1] = -nums[len - 1];
+            nums[nums.length - 1] = -nums[nums.length - 1];
         }
-        return Arrays.stream(nums).sum();
 
+        return IntStream.of(nums).sum();
     }
 }
 // @lc code=end
