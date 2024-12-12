@@ -8,6 +8,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 class Solution {
     public int[][] merge(int[][] intervals) {
@@ -20,14 +21,16 @@ class Solution {
         for (int i = 1; i < intervals.length; i++) {
             int left = intervals[i][0];
             int right = intervals[i][1];
+
             if (left > end) {
-                list.add(new int[]{start, end});
+                list.add(new int[] {start, end});
                 start = left;
             }
 
             end = Math.max(end, right);
         }
-        list.add(new int[]{start, end});
+        
+        list.add(new int[] {start, end});
         return list.toArray(new int[list.size()][]);
     }
 }
