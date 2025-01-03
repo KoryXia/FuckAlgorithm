@@ -23,4 +23,3 @@ class Solution {
     }
 }
 // @lc code=end
-// dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
