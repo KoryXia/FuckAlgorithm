@@ -7,13 +7,19 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-        int lowest = Integer.MAX_VALUE;
-        int res = 0;
-        for (int i = 0; i < prices.length; i++) {
-            lowest = Math.min(lowest, prices[i]);
-            res = Math.max(res, prices[i] - lowest);
+        int[][] dp = new int[prices.length][2];
+        dp[0][0] = -prices[0];
+        dp[0][1] = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            // ith day maximum profit with stock， not buy or buy
+            dp[i][0] = Math.max(dp[i - 1][0], -prices[i]);
+            // ith day maximum profit without stock， not sell or sell
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] + prices[i]);
         }
-        return res;
+
+        // last day sell stock, maximun profit
+        return dp[prices.length - 1][1];
     }
 }
 // @lc code=end
