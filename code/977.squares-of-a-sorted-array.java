@@ -15,12 +15,14 @@ class Solution {
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
-            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
-                res[i--] = nums[left] * nums[left];
-                left++;
-            } else {
-                res[i--] = nums[right] * nums[right];
+            if (nums[left] * nums[left] < nums[right] * nums[right]) {
+                res[i] = nums[right] * nums[right];
                 right--;
+                i--;
+            } else {
+                res[i] = nums[left] * nums[left];
+                left++;
+                i--;
             }
         }
         return res;

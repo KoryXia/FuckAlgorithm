@@ -7,9 +7,9 @@
 // @lc code=start
 func removeElement(nums []int, val int) int {
 	slow := 0
-	for _, num := range nums {
-		if num != val {
-			nums[slow] = num
+	for _, v := range nums {
+		if v != val {
+			nums[slow] = v
 			slow++
 		}
 	}

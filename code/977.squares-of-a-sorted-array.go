@@ -10,13 +10,13 @@ func sortedSquares(nums []int) []int {
 	res := make([]int, len(nums))
 
 	for left <= right {
-		squareLeft, squareRight := nums[left]*nums[left], nums[right]*nums[right]
-		if squareLeft > squareRight {
-			res[i] = squareLeft
-			left++
-		} else {
-			res[i] = squareRight
+		squareL, squareR := nums[left]*nums[left], nums[right]*nums[right]
+		if squareL < squareR {
+			res[i] = squareR
 			right--
+		} else {
+			res[i] = squareL
+			left++
 		}
 		i--
 	}
