@@ -17,15 +17,14 @@ class MyLinkedList {
         head.next = tail;
         tail.prev = head;
     }
-    
+
     public int get(int index) {
         if (index < 0 || index >= size) {
             return -1;
         }
-        ListNode curr;
 
-        if (index + 1 < size / 2) {
-            curr = head;
+        ListNode curr = head;
+        if (index <= size / 2) {
             for (int i = 0; i <= index; i++) {
                 curr = curr.next;
             }
@@ -37,65 +36,42 @@ class MyLinkedList {
         }
         return curr.val;
     }
-    
+
     public void addAtHead(int val) {
-        this.addAtIndex(0, val);
+        addAtIndex(0, val);
     }
-    
+
     public void addAtTail(int val) {
-        this.addAtIndex(size, val);
+        addAtIndex(size, val);
     }
-    
+
     public void addAtIndex(int index, int val) {
-        if (index > size) {
+        if (index < 0 || index > size) {
             return;
         }
-        index = index < 0 ? 0 : index;
-        ListNode pred, succ;
-        if (index < size / 2) {
-            pred = head;
-            for (int i = 0; i < index; i++) {
-                pred = pred.next;
-            }
-            succ = pred.next;
-        } else {
-            succ = tail;
-            for (int i = 0; i < size - index; i++) {
-                succ = succ.prev;
-            }
-            pred = succ.prev;
+        ListNode pre = head;
+        for (int i = 0; i < index; i++) {
+            pre = pre.next;
         }
+        ListNode node = new ListNode(val);
+        node.next = pre.next;
+        pre.next.prev = node;
+        node.prev = pre;
+        pre.next = node;
         size++;
-        ListNode newNode = new ListNode(val);
-        newNode.prev = pred;
-        newNode.next = succ;
-        pred.next = newNode;
-        succ.prev = newNode;
     }
-    
+
     public void deleteAtIndex(int index) {
-        if (index >= size || index < 0) {
+        if (index < 0 || index >= size) {
             return;
         }
-        ListNode pred, succ;
-        if (index < size / 2) {
-            pred = head;
-            for (int i = 0; i < index; i++) {
-                pred = pred.next;
-            }
-            succ = pred.next.next;
-        } else {
-            succ = tail;
-            for (int i = 0; i < size - index - 1; i++) {
-                succ = succ.prev;
-            }
-            pred = succ.prev.prev;
+        ListNode pre = head;
+        for (int i = 0; i < index; i++) {
+            pre = pre.next;
         }
-        size--;
-
-        pred.next = succ;
-        succ.prev = pred;
-
+        pre.next = pre.next.next;
+        pre.next.prev = pre;
+        size--;;
     }
 }
 
@@ -118,4 +94,3 @@ class ListNode {
  * obj.deleteAtIndex(index);
  */
 // @lc code=end
-

@@ -15,13 +15,12 @@
 func removeElements(head *ListNode, val int) *ListNode {
 	dummy := &ListNode{}
 	dummy.Next = head
-	cur := dummy
-
-	for cur.Next != nil {
-		if cur.Next.Val == val {
-			cur.Next = cur.Next.Next
+	curr := dummy
+	for curr.Next != nil {
+		if curr.Next.Val == val {
+			curr.Next = curr.Next.Next
 		} else {
-			cur = cur.Next
+			curr = curr.Next
 		}
 	}
 	return dummy.Next

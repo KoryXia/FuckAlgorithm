@@ -5,32 +5,30 @@
  */
 
 // @lc code=start
+
+import java.util.ListIterator;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode cur = dummy;
-        
-        while (cur.next != null && cur.next.next != null) {
-            ListNode temp = cur.next;
-            ListNode next = cur.next.next.next;
-            cur.next = cur.next.next; // Step 1
-            cur.next.next = temp; // Step 2
-            cur.next.next.next = next; // Step 3
-            cur = cur.next.next; // move cur pointer
+        if (head == null || head.next == null) {
+            return head;
         }
-        return dummy.next;
+        ListNode next = head.next;
+        ListNode node = swapPairs(next.next);
+
+        head.next = node;
+        next.next = head;
+        return next;
     }
 }
 // @lc code=end
-
