@@ -21,13 +21,21 @@ import java.util.HashSet;
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        while(head != null) {
-            if (set.contains(head)) {
-                return head;
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast) {
+                ListNode p1 = fast;
+                ListNode p2 = head;
+
+                while(p1 != p2) {
+                    p1 = p1.next;
+                    p2 = p2.next;
+                }
+                return p1;
             }
-            set.add(head);
-            head = head.next;
         }
         return null;
     }
