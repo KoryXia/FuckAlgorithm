@@ -7,19 +7,19 @@
 // @lc code=start
 func intersection(nums1 []int, nums2 []int) []int {
 	set := make(map[int]bool)
-	res := make([]int, 0)
 	for _, v := range nums1 {
-		if _, ok := set[v]; !ok {
-			set[v] = true
-		}
+		set[v] = true
 	}
 
+	var res []int
+
 	for _, v := range nums2 {
-		if _, ok := set[v]; ok {
+		if set[v] {
 			res = append(res, v)
 			delete(set, v)
 		}
 	}
+
 	return res
 }
 
