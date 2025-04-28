@@ -6,24 +6,28 @@
 
 // @lc code=start
 
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c: ransomNote.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        if (ransomNote.length() > magazine.length()) return false;
+        int[] record = new int[26];
+
+        for (char c : magazine.toCharArray()) {
+            record[c - 'a']++;
         }
-        for (char c: magazine.toCharArray()) {
-            if (map.containsKey(c)) {
-                map.put(c, map.get(c) - 1);
-                if (map.get(c) == 0) {
-                    map.remove(c);
-                }
+        
+        for (char c : ransomNote.toCharArray()) {
+            record[c - 'a']--;
+            if (record[c - 'a'] < 0) {
+                return false;
             }
         }
-        return map.size() == 0;
+        
+        for (int v : record) {
+            if (v < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 // @lc code=end

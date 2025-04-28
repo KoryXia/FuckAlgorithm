@@ -6,16 +6,14 @@
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
-	numsMap := make(map[int]int)
+	m := make(map[int]int)
 
-	for i, num := range nums {
-		complement := target - num
-
-		if index, ok := numsMap[complement]; ok {
-			return []int{index, i}
+	for i, v := range nums {
+		temp := target - v
+		if _, ok := m[temp]; ok {
+			return []int{m[temp], i}
 		}
-
-		numsMap[num] = i
+		m[nums[i]] = i
 	}
 	return nil
 }

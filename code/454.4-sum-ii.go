@@ -6,8 +6,8 @@
 
 // @lc code=start
 func fourSumCount(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
-	m := make(map[int]int)
-	res := 0
+	m, res := make(map[int]int), 0
+
 	for _, v1 := range nums1 {
 		for _, v2 := range nums2 {
 			m[v1+v2]++
@@ -16,9 +16,7 @@ func fourSumCount(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
 
 	for _, v3 := range nums3 {
 		for _, v4 := range nums4 {
-			if count, ok := m[-(v3 + v4)]; ok {
-				res += count
-			}
+			res += m[-(v3 + v4)]
 		}
 	}
 	return res

@@ -13,7 +13,6 @@ func canConstruct(ransomNote string, magazine string) bool {
 
 	for _, v := range ransomNote {
 		record[v-'a']--
-
 		if record[v-'a'] < 0 {
 			return false
 		}

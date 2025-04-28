@@ -15,7 +15,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             int temp = target - nums[i];
             if (map.containsKey(temp)) {
-                return new int[] {i, map.get(temp)};
+                return new int[]{map.get(temp), i};
             }
             map.put(nums[i], i);
         }
