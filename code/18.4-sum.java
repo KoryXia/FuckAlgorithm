@@ -12,59 +12,44 @@ import java.util.List;
 
 class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
-        List<List<Integer>> ans = new ArrayList<>();
-        int n = nums.length;
-        for (int a = 0; a < n - 3; a++) { 
-            long x = nums[a]; 
 
-            if (a > 0 && x == nums[a - 1]) {
-                continue; 
-            }
-            if (x + nums[a + 1] + nums[a + 2] + nums[a + 3] > target) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > target && nums[i] >= 0) {
                 break;
             }
-
-            if (x + nums[n - 3] + nums[n - 2] + nums[n - 1] < target) {
+            
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-                
-            for (int b = a + 1; b < n - 2; b++) {
-                long y = nums[b];
-                
-                if (b > a + 1 && y == nums[b - 1]) {
-                    continue;
-                }
-                if (x + y + nums[b + 1] + nums[b + 2] > target) {
+
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] > target && nums[i] + nums[j] >= 0) {
                     break;
                 }
-                if (x + y + nums[n - 2] + nums[n - 1] < target) {
+    
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
-
-                int left = b + 1, right = n - 1;
-
+                
+                int left = j + 1;
+                int right = nums.length - 1;
                 while (left < right) {
-                    long sum = x + y + nums[left] + nums[right];
-                    if (sum > target) {
+                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum > target) right--;
+                    else if (sum < target) left++;
+                    else {
+                        res.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        while (left < right && nums[right] == nums[right - 1]) right--;                        
+                        while (left < right && nums[left] == nums[left + 1]) left++;
                         right--;
-                    } else if (sum < target) {
                         left++;
-                    } else {
-                        while (left < right && nums[left] == nums[left + 1]) {
-                            left++;
-                        }
-                        while (left < right && nums[right] == nums[right - 1]) {
-                            right--;
-                        }
-                        ans.add(List.of((int) x, (int) y, nums[left], nums[right]));
-                        left++;
-                        right--;
                     }
                 }
             }
         }
-        return ans;
+        return res;
     }
 }
 // @lc code=end

@@ -6,41 +6,43 @@
 
 // @lc code=start
 func fourSum(nums []int, target int) [][]int {
-	if len(nums) < 4 {
-		return nil
-	}
+	res := [][]int{}
 	sort.Ints(nums)
-	var res [][]int
-	for i := 0; i < len(nums)-3; i++ {
-		n1 := nums[i]
-		if i > 0 && n1 == nums[i-1] {
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > target && nums[i] >= 0 {
+			break
+		}
+
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		for j := i + 1; j < len(nums)-2; j++ {
-			n2 := nums[j]
-			if j > i+1 && n2 == nums[j-1] {
+
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i]+nums[j] > target && nums[i]+nums[j] >= 0 {
+				break
+			}
+
+			if j > i+1 && nums[j] == nums[j-1] {
 				continue
 			}
-			l := j + 1
-			r := len(nums) - 1
-			for l < r {
-				n3 := nums[l]
-				n4 := nums[r]
-				sum := n1 + n2 + n3 + n4
+
+			left, right := j+1, len(nums)-1
+			for left < right {
+				sum := nums[i] + nums[j] + nums[left] + nums[right]
 				if sum < target {
-					l++
+					left++
 				} else if sum > target {
-					r--
+					right--
 				} else {
-					res = append(res, []int{n1, n2, n3, n4})
-					for l < r && n3 == nums[l+1] {
-						l++
+					res = append(res, []int{nums[i], nums[j], nums[left], nums[right]})
+					for left < right && nums[left] == nums[left+1] {
+						left++
 					}
-					for l < r && n4 == nums[r-1] {
-						r--
+					for left < right && nums[right] == nums[right-1] {
+						right--
 					}
-					r--
-					l++
+					left++
+					right--
 				}
 			}
 		}

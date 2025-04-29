@@ -6,31 +6,35 @@
 
 // @lc code=start
 func threeSum(nums []int) [][]int {
-	sort.Ints(nums)
 	res := [][]int{}
-	for i := 0; i < len(nums)-2; i++ {
-		n1 := nums[i]
-		if n1 > 0 {
-			break
+	sort.Ints(nums)
+
+	for i, _ := range nums {
+		if nums[i] > 0 {
+			return res
 		}
-		if i > 0 && n1 == nums[i-1] {
+
+		if i > 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		l, r := i+1, len(nums)-1
-		for l < r {
-			n2, n3 := nums[l], nums[r]
-			if n1+n2+n3 == 0 {
-				res = append(res, []int{n1, n2, n3})
-				for l < r && nums[l] == n2 {
-					l++
-				}
-				for l < r && nums[r] == n3 {
-					r--
-				}
-			} else if n1+n2+n3 < 0 {
-				l++
+
+		left, right := i+1, len(nums)-1
+		for left < right {
+			sum := nums[i] + nums[left] + nums[right]
+			if sum < 0 {
+				left++
+			} else if sum > 0 {
+				right--
 			} else {
-				r--
+				res = append(res, []int{nums[i], nums[left], nums[right]})
+				for left < right && nums[left] == nums[left+1] {
+					left++
+				}
+				for left < right && nums[right] == nums[right-1] {
+					right--
+				}
+				left++
+				right--
 			}
 		}
 	}
