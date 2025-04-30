@@ -6,17 +6,16 @@
 
 // @lc code=start
 func reverseStr(s string, k int) string {
-	ss := []byte(s)
-	for i := 0; i < len(ss); i += 2 * k {
-		left := i
-		right := min(left+k-1, len(ss)-1)
+	bs := []byte(s)
+	for i := 0; i < len(bs); i += 2 * k {
+		left, right := i, min(i+k-1, len(bs)-1)
 		for left < right {
-			ss[left], ss[right] = ss[right], ss[left]
+			bs[left], bs[right] = bs[right], bs[left]
 			left++
 			right--
 		}
 	}
-	return string(ss)
+	return string(bs)
 }
 
 // @lc code=end

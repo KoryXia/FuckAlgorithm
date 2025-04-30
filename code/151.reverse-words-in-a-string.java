@@ -19,12 +19,10 @@ class Solution {
         while (s.charAt(start) == ' ') start++;
         while (s.charAt(end) == ' ') end--;
         StringBuilder sb = new StringBuilder();
-        while (start <= end) {
-            char c = s.charAt(start);
-            if (c != ' ' || sb.charAt(sb.length() - 1) != ' ') {
-                sb.append(c);
+        for (int i = start; i <= end; i++) {
+            if (s.charAt(i) != ' ' || sb.charAt(sb.length() - 1) != ' ') {
+                sb.append(s.charAt(i));
             }
-            start++;
         }
         return sb;
     }

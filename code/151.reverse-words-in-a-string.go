@@ -7,33 +7,33 @@
 // @lc code=start
 func reverseWords(s string) string {
 	b := []byte(s)
-
-	slow := 0
-	for i := 0; i < len(b); i++ {
-		if b[i] != ' ' {
-			if slow != 0 {
-				b[slow] = ' '
-				slow++
-			}
-			for i < len(b) && b[i] != ' ' {
-				b[slow] = b[i]
-				slow++
-				i++
-			}
+	var res []byte
+	l, r := 0, len(b)-1
+	for b[l] == ' ' {
+		l++
+	}
+	for b[r] == ' ' {
+		r--
+	}
+	for i := l; i <= r; i++ {
+		if b[i] != ' ' || res[len(res)-1] != ' ' {
+			res = append(res, b[i])
 		}
 	}
-	b = b[0:slow]
 
-	reverse(b)
+	reverse(res)
 
-	last := 0
-	for i := 0; i <= len(b); i++ {
-		if i == len(b) || b[i] == ' ' {
-			reverse(b[last:i])
-			last = i + 1
+	l, r = 0, 1
+
+	for l < len(res) {
+		for r < len(res) && res[r] != ' ' {
+			r++
 		}
+		reverse(res[l:r])
+		l = r + 1
+		r = l + 1
 	}
-	return string(b)
+	return string(res)
 }
 
 func reverse(b []byte) {

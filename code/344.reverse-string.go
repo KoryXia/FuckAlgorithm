@@ -6,8 +6,8 @@
 
 // @lc code=start
 func reverseString(s []byte) {
-	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
-		s[i], s[j] = s[j], s[i]
+	for l, r := 0, len(s)-1; l < r; l, r = l+1, r-1 {
+		s[l], s[r] = s[r], s[l]
 	}
 }
 
