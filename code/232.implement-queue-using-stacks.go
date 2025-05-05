@@ -5,39 +5,36 @@
  */
 
 // @lc code=start
-type MyStack []int
+type Stack []int
 
-func (s *MyStack) Push(v int) {
-	*s = append(*s, v)
+func (s *Stack) Empty() bool {
+	return len(*s) == 0
 }
 
-func (s *MyStack) Pop() int {
+func (s *Stack) Push(x int) {
+	*s = append(*s, x)
+
+}
+
+func (s *Stack) Pop() int {
 	val := (*s)[len(*s)-1]
 	*s = (*s)[:len(*s)-1]
 	return val
 }
 
-func (s *MyStack) Peek() int {
+func (s *Stack) Peek() int {
 	return (*s)[len(*s)-1]
 }
 
-func (s *MyStack) Size() int {
-	return len(*s)
-}
-
-func (s *MyStack) Empty() bool {
-	return s.Size() == 0
-}
-
 type MyQueue struct {
-	stackIn  *MyStack
-	stackOut *MyStack
+	stackIn  *Stack
+	stackOut *Stack
 }
 
 func Constructor() MyQueue {
 	return MyQueue{
-		stackIn:  &MyStack{},
-		stackOut: &MyStack{},
+		stackIn:  &Stack{},
+		stackOut: &Stack{},
 	}
 }
 

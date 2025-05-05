@@ -11,7 +11,7 @@ type MyStack struct {
 
 func Constructor() MyStack {
 	return MyStack{
-		queue: make([]int, 0),
+		queue: []int{},
 	}
 }
 
@@ -21,7 +21,7 @@ func (this *MyStack) Push(x int) {
 
 func (this *MyStack) Pop() int {
 	n := len(this.queue) - 1
-	for n != 0 {
+	for n > 0 {
 		val := this.queue[0]
 		this.queue = this.queue[1:]
 		this.queue = append(this.queue, val)
@@ -34,7 +34,7 @@ func (this *MyStack) Pop() int {
 
 func (this *MyStack) Top() int {
 	val := this.Pop()
-	this.queue = append(this.queue, val)
+	this.Push(val)
 	return val
 }
 

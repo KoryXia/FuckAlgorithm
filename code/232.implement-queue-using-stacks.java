@@ -6,42 +6,42 @@
 
 // @lc code=start
 
+
 import java.util.Stack;
 
 class MyQueue {
-    private Stack<Integer> inStack;
-    private Stack<Integer> outStack;
+    Stack<Integer> inStack;
+    Stack<Integer> outStack;
+
     public MyQueue() {
-        this.outStack = new Stack<>();
         this.inStack = new Stack<>();
+        this.outStack = new Stack<>();
     }
-    
+
     public void push(int x) {
         inStack.push(x);
     }
-    
+
     public int pop() {
-        if (outStack.isEmpty()) {
-            in2out();
-        }
+        in2out();
         return outStack.pop();
     }
-    
+
     public int peek() {
-        if (outStack.isEmpty()) {
-            in2out();
-        }
+        in2out();
         return outStack.peek();
     }
 
-    public void in2out() {
+    public boolean empty() {
+        return inStack.isEmpty() && outStack.isEmpty();
+    }
+
+    private void in2out() {
+        if (!outStack.isEmpty())
+            return;
         while (!inStack.isEmpty()) {
             outStack.push(inStack.pop());
         }
-    }
-    
-    public boolean empty() {
-        return inStack.isEmpty() && outStack.isEmpty();
     }
 }
 
@@ -54,4 +54,3 @@ class MyQueue {
  * boolean param_4 = obj.empty();
  */
 // @lc code=end
-

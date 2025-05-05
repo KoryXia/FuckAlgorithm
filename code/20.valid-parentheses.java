@@ -6,29 +6,23 @@
 
 // @lc code=start
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put(']', '[');
-        map.put('}', '{');
-
-        for (Character c : s.toCharArray()) {
-            if (map.containsKey(c)) {
-                if (stack.isEmpty() || stack.pop() != map.get(c)) {
-                    return false;
-                }
-                continue;
+        for (char c : s.toCharArray()) {
+            if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (c == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            } else if (c == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
             } else {
                 stack.push(c);
             }
         }
-        return stack.isEmpty();
+        return stack.size() == 0;
     }
 }
 // @lc code=end

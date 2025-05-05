@@ -6,13 +6,7 @@
 
 // @lc code=start
 func isValid(s string) bool {
-	stack := make([]rune, 0)
-
-	m := make(map[rune]rune)
-	m[')'] = '('
-	m[']'] = '['
-	m['}'] = '{'
-
+	var stack []rune
 	for _, c := range s {
 		if c == '(' || c == '[' || c == '{' {
 			stack = append(stack, c)
@@ -20,11 +14,16 @@ func isValid(s string) bool {
 			if len(stack) == 0 {
 				return false
 			}
-			peek := stack[len(stack)-1]
-			if peek != m[c] {
+			prev := stack[len(stack)-1]
+			if prev == '(' && c == ')' {
+				stack = stack[:len(stack)-1]
+			} else if prev == '[' && c == ']' {
+				stack = stack[:len(stack)-1]
+			} else if prev == '{' && c == '}' {
+				stack = stack[:len(stack)-1]
+			} else {
 				return false
 			}
-			stack = stack[:len(stack)-1]
 		}
 	}
 	return len(stack) == 0
