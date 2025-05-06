@@ -7,19 +7,18 @@
 // @lc code=start
 class Solution {
     public String removeDuplicates(String s) {
-        StringBuffer res = new StringBuffer();
-        int curr = -1;
+        StringBuilder sb = new StringBuilder();
+        int top = -1;
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (curr >= 0 && res.charAt(curr) == c) {
-                res.deleteCharAt(curr);
-                curr--;
+            if (top >= 0 && sb.charAt(top) == s.charAt(i)) {
+                sb.deleteCharAt(top);
+                top--;
             } else {
-                res.append(c);
-                curr++;
+                sb.append(s.charAt(i));
+                top++;
             }
         }
-        return res.toString();
+        return sb.toString();
     }
 }
 // @lc code=end

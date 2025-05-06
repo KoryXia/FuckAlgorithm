@@ -6,12 +6,12 @@
 
 // @lc code=start
 func removeDuplicates(s string) string {
-	stack := make([]byte, 0)
-	for i := 0; i < len(s); i++ {
-		if len(stack) > 0 && stack[len(stack)-1] == s[i] {
+	var stack []rune
+	for _, v := range s {
+		if len(stack) > 0 && stack[len(stack)-1] == v {
 			stack = stack[:len(stack)-1]
 		} else {
-			stack = append(stack, s[i])
+			stack = append(stack, v)
 		}
 	}
 	return string(stack)

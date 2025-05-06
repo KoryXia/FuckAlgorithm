@@ -6,18 +6,13 @@
 
 // @lc code=start
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        Queue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0] != o2[0] ? o2[0] - o1[0] : o2[1] - o1[1];
-            }
-
+        Queue<int[]> queue = new PriorityQueue<>((a, b) -> {
+            return a[0] != b[0] ? b[0] - a[0] : b[1] - a[1];
         });
 
         for (int i = 0; i < k; i++) {

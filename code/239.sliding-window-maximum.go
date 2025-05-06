@@ -5,54 +5,50 @@
  */
 
 // @lc code=start
-type MyQueue struct {
+type MaxQueue struct {
 	queue []int
 }
 
-func NewMyQueue() *MyQueue {
-	return &MyQueue{
+func NewMaxQueue() *MaxQueue {
+	return &MaxQueue{
 		queue: make([]int, 0),
 	}
 }
 
-func (m *MyQueue) Front() int {
+func (m *MaxQueue) Front() int {
 	return m.queue[0]
 }
 
-func (m *MyQueue) Back() int {
+func (m *MaxQueue) Back() int {
 	return m.queue[len(m.queue)-1]
 }
 
-func (m *MyQueue) Empty() bool {
-	return len(m.queue) == 0
-}
-
-func (m *MyQueue) Push(val int) {
-	for !m.Empty() && val > m.Back() {
+func (m *MaxQueue) Push(val int) {
+	for len(m.queue) > 0 && val > m.Back() {
 		m.queue = m.queue[:len(m.queue)-1]
 	}
 	m.queue = append(m.queue, val)
 }
 
-func (m *MyQueue) Pop(val int) {
-	if !m.Empty() && val == m.Front() {
+func (m *MaxQueue) Pop(val int) {
+	if len(m.queue) > 0 && val == m.Front() {
 		m.queue = m.queue[1:]
 	}
 }
 
 func maxSlidingWindow(nums []int, k int) []int {
-	queue := NewMyQueue()
-	res := make([]int, 0)
+	queue := NewMaxQueue()
+	res := make([]int, len(nums)-k+1)
 	for i := 0; i < k; i++ {
 		queue.Push(nums[i])
 	}
 
-	res = append(res, queue.Front())
+	res[0] = queue.Front()
 
 	for i := k; i < len(nums); i++ {
 		queue.Pop(nums[i-k])
 		queue.Push(nums[i])
-		res = append(res, queue.Front())
+		res[i-k+1] = queue.Front()
 	}
 	return res
 }

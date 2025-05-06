@@ -11,9 +11,8 @@ import java.util.Stack;
 class Solution {
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
-
         for (String token : tokens) {
-            if (isInteger(token)) {
+            if (!"+".equals(token) && !"-".equals(token) && !"*".equals(token) && !"/".equals(token)) {
                 stack.push(Integer.valueOf(token));
             } else {
                 int num1 = stack.pop();
@@ -39,13 +38,13 @@ class Solution {
         return stack.pop();
     }
 
-    public boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+    // public boolean isInteger(String s) {
+    //     try {
+    //         Integer.parseInt(s);
+    //         return true;
+    //     } catch (NumberFormatException e) {
+    //         return false;
+    //     }
+    // }
 }
 // @lc code=end
