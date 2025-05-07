@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=102 lang=golang
+ * @lc app=leetcode id=199 lang=golang
  *
- * [102] Binary Tree Level Order Traversal
+ * [199] Binary Tree Right Side View
  */
 
 // @lc code=start
@@ -13,12 +13,12 @@
  *     Right *TreeNode
  * }
  */
-func levelOrder(root *TreeNode) [][]int {
-	var res [][]int
+func rightSideView(root *TreeNode) []int {
+	var res []int
 	if root == nil {
 		return res
 	}
-
+	var levels [][]int
 	var queue []*TreeNode
 	queue = append(queue, root)
 
@@ -35,7 +35,10 @@ func levelOrder(root *TreeNode) [][]int {
 				queue = append(queue, node.Right)
 			}
 		}
-		res = append(res, level)
+		levels = append(levels, level)
+	}
+	for _, level := range levels {
+		res = append(res, level[len(level)-1])
 	}
 	return res
 }
