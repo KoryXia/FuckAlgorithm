@@ -18,25 +18,17 @@ func isSymmetric(root *TreeNode) bool {
 	compare = func(left, right *TreeNode) bool {
 		if left == nil && right == nil {
 			return true
-		}
-
-		if left != nil && right == nil {
+		} else if left == nil && right != nil {
+			return false
+		} else if left != nil && right == nil {
+			return false
+		} else if left.Val != right.Val {
 			return false
 		}
-
-		if left == nil && right != nil {
-			return false
-		}
-
-		if left.Val != right.Val {
-			return false
-		}
-
 		outside := compare(left.Left, right.Right)
 		inside := compare(left.Right, right.Left)
 		return outside && inside
 	}
-
 	return compare(root.Left, root.Right)
 }
 

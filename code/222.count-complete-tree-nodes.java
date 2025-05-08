@@ -30,26 +30,9 @@ class Solution {
         if (root == null) {
             return 0;
         }
-        
-        int res = 0;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            while (size > 0) {
-                TreeNode node = queue.poll();
-                if (node.left != null) {
-                    queue.offer(node.left);
-                }
-                if (node.right != null) {
-                    queue.offer(node.right);
-                }
-                res++;
-                size--;
-            }
-        }
-        return res;        
+        int left = countNodes(root.left);
+        int right = countNodes(root.right);
+        return left + right + 1;
     }
 }
 // @lc code=end

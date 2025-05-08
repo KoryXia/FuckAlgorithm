@@ -17,27 +17,20 @@ func countNodes(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
-
-	res := 0
-	var queue []*TreeNode
-	queue = append(queue, root)
-
-	for len(queue) > 0 {
-		size := len(queue)
-		for i := 0; i < size; i++ {
-			node := queue[0]
-			queue = queue[1:]
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
-			res++
-			size--
-		}
+	left, right := root.Left, root.Right
+	leftDeepth, rightDeepth := 0, 0
+	for left != nil {
+		left = left.Left
+		leftDeepth++
 	}
-	return res
+	for right != nil {
+		right = right.Right
+		rightDeepth++
+	}
+	if leftDeepth == rightDeepth {
+		return (2 << leftDeepth) - 1
+	}
+	return countNodes(root.Left) + countNodes(root.Right) + 1
 }
 
 // @lc code=end
