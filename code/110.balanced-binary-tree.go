@@ -19,12 +19,10 @@ func isBalanced(root *TreeNode) bool {
 		if node == nil {
 			return 0
 		}
-
 		left := getHeight(node.Left)
 		if left == -1 {
 			return -1
 		}
-
 		right := getHeight(node.Right)
 		if right == -1 {
 			return -1
@@ -33,7 +31,7 @@ func isBalanced(root *TreeNode) bool {
 		if left-right > 1 || right-left > 1 {
 			return -1
 		} else {
-			return max(left, right) + 1
+			return 1 + max(left, right)
 		}
 	}
 	return getHeight(root) != -1

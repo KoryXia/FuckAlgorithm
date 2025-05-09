@@ -14,23 +14,16 @@
  * }
  */
 func sumOfLeftLeaves(root *TreeNode) int {
-	var countLeftLeavesSum func(node *TreeNode, isLeft bool) int
-	countLeftLeavesSum = func(node *TreeNode, isLeft bool) int {
-		if node == nil {
-			return 0
-		}
-
-		if node.Left == nil && node.Right == nil && isLeft {
-			return node.Val
-		}
-
-		sum := 0
-		sum += countLeftLeavesSum(node.Left, true)
-		sum += countLeftLeavesSum(node.Right, false)
-		return sum
+	if root == nil {
+		return 0
 	}
 
-	return countLeftLeavesSum(root, false)
+	left, right := sumOfLeftLeaves(root.Left), sumOfLeftLeaves(root.Right)
+	var currLeft int
+	if root.Left != nil && root.Left.Left == nil && root.Left.Right == nil {
+		currLeft = root.Left.Val
+	}
+	return left + right + currLeft
 }
 
 // @lc code=end

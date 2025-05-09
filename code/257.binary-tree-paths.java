@@ -25,24 +25,24 @@ import java.util.List;
  * }
  */
 class Solution {
-    List<String> res = new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        traversal(root, "");
+        List<String> res = new ArrayList<>();
+        traversal(root, "", res);
         return res;
     }
 
-    public void traversal(TreeNode node, String path) {
+    public void traversal(TreeNode node, String path, List<String> res) {
         if (node == null) {
             return;
         }
+
+        path += node.val;
         if (node.left == null && node.right == null) {
-            res.add(new StringBuilder(path).append(node.val).toString());
+            res.add(path);
             return;
         }
-
-        String newPath = new StringBuilder(path).append(node.val).append("->").toString(); 
-        traversal(node.left, newPath);
-        traversal(node.right, newPath);
+        traversal(node.left, path + "->", res);
+        traversal(node.right, path + "->", res);
     }
 }
 // @lc code=end

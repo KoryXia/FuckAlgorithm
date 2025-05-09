@@ -22,21 +22,19 @@
  */
 class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
-        return countLeftLeavesSum(root, false);
-    }
-    public int countLeftLeavesSum(TreeNode node, boolean isLeft) {
-        if (node == null) {
+        if (root == null) {
             return 0;
         }
 
-        if (node.left == null && node.right == null && isLeft) {
-            return node.val;
+        int left = sumOfLeftLeaves(root.left);
+        int right = sumOfLeftLeaves(root.right);
+
+        int currLeft = 0;
+        if (root.left != null && root.left.left == null && root.left.right == null){
+            currLeft = root.left.val;
         }
 
-        int sum = 0;
-        sum += countLeftLeavesSum(node.left, true);
-        sum += countLeftLeavesSum(node.right, false);
-        return sum;
+        return left + right + currLeft;
     }
 }
 // @lc code=end

@@ -15,20 +15,21 @@
  */
 func binaryTreePaths(root *TreeNode) []string {
 	res := make([]string, 0)
-	var traversal func(node *TreeNode, path string)
-	traversal = func(node *TreeNode, path string) {
+	var traverse func(node *TreeNode, path string)
+	traverse = func(node *TreeNode, path string) {
 		if node == nil {
 			return
 		}
+
+		path += strconv.Itoa(node.Val)
 		if node.Left == nil && node.Right == nil {
-			res = append(res, path+strconv.Itoa(node.Val))
+			res = append(res, path)
 			return
 		}
-		path = path + strconv.Itoa(node.Val) + "->"
-		traversal(node.Left, path)
-		traversal(node.Right, path)
+		traverse(node.Left, path+"->")
+		traverse(node.Right, path+"->")
 	}
-	traversal(root, "")
+	traverse(root, "")
 	return res
 }
 
